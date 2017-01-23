@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-parent</artifactId>
-    <version>1.7.23-SNAPSHOT</version>
-    <relativePath></relativePath>
+    <version>1.7.22</version>
+    <relativePath />
   </parent>
 
   <groupId>com.github.sbabcoc</groupId>
   <artifactId>slf4j-testng</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>SLF4J TestNG Reporter Binding</name>
   <description>SLF4J TestNG Reporter binding</description>
@@ -45,7 +44,7 @@
     <connection>scm:git:git@github.com:sbabcoc/slf4j-testng.git</connection>
     <developerConnection>scm:git:git@github.com:sbabcoc/slf4j-testng.git</developerConnection>
     <url>https://github.com/sbabcoc/slf4j-testng/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>slf4j-testng-1.0.0</tag>
   </scm>
 
   <distributionManagement>
@@ -69,13 +68,13 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>${project.parent.version}</version>
+        <version>1.7.22</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <type>test-jar</type>
-        <version>${project.parent.version}</version>
+        <version>1.7.22</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
