@@ -13,6 +13,7 @@
 
   <groupId>com.github.sbabcoc</groupId>
   <artifactId>slf4j-testng</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>SLF4J TestNG Reporter Binding</name>
   <description>SLF4J TestNG Reporter binding</description>
@@ -65,15 +66,21 @@
         <artifactId>testng</artifactId>
         <version>${testng.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${project.parent.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <type>test-jar</type>
+        <version>${project.parent.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   
   <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -82,8 +89,12 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
       <type>test-jar</type>
-      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
