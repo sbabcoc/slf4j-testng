@@ -43,11 +43,12 @@
     <gpg-plugin.version>1.6</gpg-plugin.version>
     <staging-plugin.version>1.6.7</staging-plugin.version>
     <release-plugin.version>2.5.3</release-plugin.version>
+    <skipSigning>true</skipSigning>
   </properties>
 
   <scm>
-    <connection>scm:git:git@github.com:sbabcoc/slf4j-testng.git</connection>
-    <developerConnection>scm:git:git@github.com:sbabcoc/slf4j-testng.git</developerConnection>
+    <connection>scm:git:https://github.com/sbabcoc/slf4j-testng.git</connection>
+    <developerConnection>scm:git:https://github.com/sbabcoc/slf4j-testng.git</developerConnection>
     <url>https://github.com/sbabcoc/slf4j-testng/tree/master</url>
     <tag>HEAD</tag>
   </scm>
@@ -89,12 +90,10 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -142,6 +141,11 @@
             <goals>
               <goal>sign</goal>
             </goals>
+            <configuration>
+              <keyname>${gpg.keyname}</keyname>
+              <passphraseServerId>${gpg.keyname}</passphraseServerId>
+              <skip>${skipSigning}</skip>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -169,4 +173,13 @@
       </plugin>
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>signing</id>
+      <properties>
+        <skipSigning>false</skipSigning>
+      </properties>
+    </profile>
+  </profiles>
 </project>
