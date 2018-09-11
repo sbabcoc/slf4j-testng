@@ -424,6 +424,7 @@ public class ReporterLogger extends MarkerIgnoringBase {
      * Is the given log level currently enabled?
      *
      * @param logLevel is this level enabled?
+     * @return {@code true} if given log level is enabled; otherwise {@code false}
      */
     protected boolean isLevelEnabled(int logLevel) {
         // log level are numerically ordered so can use simple numeric
