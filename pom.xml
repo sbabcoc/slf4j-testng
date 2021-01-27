@@ -10,7 +10,7 @@
 
   <groupId>com.github.sbabcoc</groupId>
   <artifactId>slf4j-testng</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <packaging>jar</packaging>
   <name>SLF4J TestNG Reporter Binding</name>
   <description>SLF4J TestNG Reporter binding</description>
@@ -51,7 +51,7 @@
     <connection>scm:git:https://github.com/sbabcoc/slf4j-testng.git</connection>
     <developerConnection>scm:git:https://github.com/sbabcoc/slf4j-testng.git</developerConnection>
     <url>https://github.com/sbabcoc/slf4j-testng/tree/master</url>
-    <tag>HEAD</tag>
+    <tag>slf4j-testng-1.0.3</tag>
   </scm>
 
   <distributionManagement>
