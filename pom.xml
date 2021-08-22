@@ -1,10 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-parent</artifactId>
-    <version>1.7.30</version>
+    <version>1.7.32</version>
     <relativePath />
   </parent>
 
@@ -33,17 +33,16 @@
   </developers>
   
   <properties>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <required.jdk.version>1.7</required.jdk.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <javadoc.plugin.version>3.3.0</javadoc.plugin.version>
     <testng.version>6.10</testng.version>
-    <junit.version>4.13.1</junit.version>
-    <toolchains-plugin.version>1.1</toolchains-plugin.version>
-    <source-plugin.version>3.0.1</source-plugin.version>
-    <javadoc-plugin.version>2.10.4</javadoc-plugin.version>
-    <gpg-plugin.version>1.6</gpg-plugin.version>
-    <staging-plugin.version>1.6.7</staging-plugin.version>
-    <release-plugin.version>2.5.3</release-plugin.version>
+    <junit.version>4.13.2</junit.version>
+    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    <gpg-plugin.version>3.0.1</gpg-plugin.version>
+    <staging-plugin.version>1.6.8</staging-plugin.version>
+    <release-plugin.version>3.0.0-M4</release-plugin.version>
     <skipSigning>true</skipSigning>
   </properties>
 
@@ -108,18 +107,13 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-toolchains-plugin</artifactId>
-          <version>${toolchains-plugin.version}</version>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${compiler-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>${source-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${javadoc-plugin.version}</version>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire-plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -136,75 +130,16 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>${release-plugin.version}</version>
         </plugin>
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-toolchains-plugin</artifactId>
-                    <versionRange>[1.0.0,)</versionRange>
-                    <goals>
-                      <goal>toolchain</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <execute />
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>        
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-toolchains-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>toolchain</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <toolchains>
-            <jdk>
-              <version>1.7</version>
-              <vendor>oracle</vendor>
-            </jdk>
-          </toolchains>
-        </configuration>
+        <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
+        <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
