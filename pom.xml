@@ -10,7 +10,7 @@
 
   <groupId>com.github.sbabcoc</groupId>
   <artifactId>slf4j-testng</artifactId>
-  <version>1.0.5-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>SLF4J TestNG Reporter Binding</name>
   <description>SLF4J TestNG Reporter binding</description>
