@@ -27,8 +27,6 @@ package org.slf4j.impl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.impl.ReporterLogger;
-
 import static org.junit.Assert.*;
 
 public class ReporterLoggerTest {
