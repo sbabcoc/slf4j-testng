@@ -31,11 +31,6 @@ import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 /**
  * Test whether invoking the SLF4J API causes problems or not.
@@ -66,9 +61,9 @@ public class InvocationTest {
 
     @Test
     public void test2() {
-        Integer i1 = new Integer(1);
-        Integer i2 = new Integer(2);
-        Integer i3 = new Integer(3);
+        Integer i1 = Integer.valueOf(1);
+        Integer i2 = Integer.valueOf(2);
+        Integer i3 = Integer.valueOf(3);
         Exception e = new Exception("This is a test exception.");
         Logger logger = LoggerFactory.getLogger("test2");
 
@@ -84,7 +79,7 @@ public class InvocationTest {
         logger.warn("Hello world 3", e);
 
         logger.error("Hello world 4.");
-        logger.error("Hello world {}", new Integer(3));
+        logger.error("Hello world {}", Integer.valueOf(3));
         logger.error("Hello world 4.", e);
     }
 

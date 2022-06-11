@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 
 import org.slf4j.LoggerFactoryFriend;
-import org.slf4j.helpers.MultithreadedInitializationTest;
 import org.testng.ITestNGListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
