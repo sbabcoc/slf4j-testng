@@ -36,7 +36,7 @@
     <required.jdk.version>1.8</required.jdk.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <javadoc.plugin.version>3.4.0</javadoc.plugin.version>
-    <testng.version>7.5</testng.version>
+    <testng.version>7.5.1</testng.version>
     <junit.version>4.13.2</junit.version>
     <compiler-plugin.version>3.10.1</compiler-plugin.version>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
