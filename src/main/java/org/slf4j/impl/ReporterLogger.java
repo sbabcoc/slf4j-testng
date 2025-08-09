@@ -148,16 +148,88 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /** All system properties used by <code>ReporterLogger</code> start with this prefix */
     public static final String SYSTEM_PREFIX = "org.slf4j.reporterLogger.";
 
+    /**
+     * Default log level.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.defaultLogLevel</b><br>
+     * default: <b>INFO</b>
+     */
     public static final String DEFAULT_LOG_LEVEL_KEY = SYSTEM_PREFIX + "defaultLogLevel";
+
+    /**
+     * Show date and time.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.showDateTime</b><br>
+     * default: {@code false}
+     */
     public static final String SHOW_DATE_TIME_KEY = SYSTEM_PREFIX + "showDateTime";
+
+    /**
+     * Date/time format.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.dateTimeFormat</b><br>
+     * default: {@code null}
+     */
     public static final String DATE_TIME_FORMAT_KEY = SYSTEM_PREFIX + "dateTimeFormat";
+
+    /**
+     * Show thread name.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.showThreadName</b><br>
+     * default: {@code true}
+     */
     public static final String SHOW_THREAD_NAME_KEY = SYSTEM_PREFIX + "showThreadName";
+
+    /**
+     * Show log name.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.showLogName</b><br>
+     * default: {@code true}
+     */
     public static final String SHOW_LOG_NAME_KEY = SYSTEM_PREFIX + "showLogName";
+
+    /**
+     * Show short log name.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.showShortLogName</b><br>
+     * default: {@code false}
+     */
     public static final String SHOW_SHORT_LOG_NAME_KEY = SYSTEM_PREFIX + "showShortLogName";
+
+    /**
+     * Show log level in brackets.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.levelInBrackets</b><br>
+     * default: {@code false}
+     */
     public static final String LEVEL_IN_BRACKETS_KEY = SYSTEM_PREFIX + "levelInBrackets";
+
+    /**
+     * WARN level string.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.warnLevelString</b><br>
+     * default: <b>WARN</b>
+     */
     public static final String WARN_LEVEL_STRING_KEY = SYSTEM_PREFIX + "warnLevelString";
+
+    /**
+     * Fork log output to <i>STDOUT</i>.
+     * <p>
+     * name: <b>org.slf4j.reporterLogger.logToStdOut</b><br>
+     * default: {@code false}
+     */
     public static final String LOG_TO_STDOUT_KEY = SYSTEM_PREFIX + "logToStdOut";
 
+    /**
+     * Prefix of system properties used to specify class/package default log levels.
+     * <p>
+     * <b>NOTE</b>: System properties with this prefix can be used to set the default log level
+     * of loggers based on the name of each logger. In typical applications, loggers are named
+     * for the classes they belong to, and the feature that looks for system properties with
+     * this prefix checks for properties that refer to the full name of the logger on down to
+     * the root package. This allows you to specify a default log level for all of the classes
+     * in an entire package hierarchy.
+     */
     public static final String LOG_KEY_PREFIX = SYSTEM_PREFIX + "log.";
 
     private static String getStringProperty(String name) {
@@ -248,6 +320,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Package access allows only {@link ReporterLoggerFactory} to instantiate
      * ReporterLogger instances.
+     * 
+     * @param name logger name
      */
     ReporterLogger(String name) {
         this.name = name;
@@ -258,7 +332,6 @@ public class ReporterLogger extends MarkerIgnoringBase {
         } else {
             this.currentLogLevel = DEFAULT_LOG_LEVEL;
         }
-        
     }
 
     String recursivelyComputeLevelString() {
@@ -392,25 +465,25 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * For formatted messages, first substitute arguments and then log.
      *
-     * @param level
-     * @param format
-     * @param arg1
-     * @param arg2
+     * @param level logging level
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
-    private void formatAndLog(int level, String format, Object arg1, Object arg2) {
+    private void formatAndLog(int level, String format, Object param1, Object param2) {
         if (!isLevelEnabled(level)) {
             return;
         }
-        FormattingTuple tp = MessageFormatter.format(format, arg1, arg2);
+        FormattingTuple tp = MessageFormatter.format(format, param1, param2);
         log(level, tp.getMessage(), tp.getThrowable());
     }
 
     /**
      * For formatted messages, first substitute arguments and then log.
      *
-     * @param level
-     * @param format
-     * @param arguments a list of 3 ore more arguments
+     * @param level logging level
+     * @param format message format string
+     * @param arguments a list of 3 or more arguments
      */
     private void formatAndLog(int level, String format, Object... arguments) {
         if (!isLevelEnabled(level)) {
@@ -432,7 +505,11 @@ public class ReporterLogger extends MarkerIgnoringBase {
         return (logLevel >= currentLogLevel);
     }
 
-    /** Are {@code trace} messages currently enabled? */
+    /**
+     * Are {@code trace} messages currently enabled?
+     * 
+     * @return {@code true} if TRACE messages are enabled; otherwise {@code false}
+     */
     public boolean isTraceEnabled() {
         return isLevelEnabled(LOG_LEVEL_TRACE);
     }
@@ -440,6 +517,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * A simple implementation which logs messages of level TRACE according
      * to the format outlined above.
+     * 
+     * @param msg message to be logged
      */
     public void trace(String msg) {
         log(LOG_LEVEL_TRACE, msg, null);
@@ -448,6 +527,9 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform single parameter substitution before logging the message of level
      * TRACE according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 substitution parameter
      */
     public void trace(String format, Object param1) {
         formatAndLog(LOG_LEVEL_TRACE, format, param1, null);
@@ -456,6 +538,10 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform double parameter substitution before logging the message of level
      * TRACE according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
     public void trace(String format, Object param1, Object param2) {
         formatAndLog(LOG_LEVEL_TRACE, format, param1, param2);
@@ -464,17 +550,29 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform double parameter substitution before logging the message of level
      * TRACE according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param argArray array of substitution parameters
      */
     public void trace(String format, Object... argArray) {
         formatAndLog(LOG_LEVEL_TRACE, format, argArray);
     }
 
-    /** Log a message of level TRACE, including an exception. */
+    /**
+     * Log a message of level TRACE, including an exception.
+     * 
+     * @param msg message to be logged
+     * @param t {@link Throwable} object
+     */
     public void trace(String msg, Throwable t) {
         log(LOG_LEVEL_TRACE, msg, t);
     }
 
-    /** Are {@code debug} messages currently enabled? */
+    /**
+     * Are {@code debug} messages currently enabled?
+     * 
+     * @return {@code true} if DEBUG messages are enabled; otherwise {@code false}
+     */
     public boolean isDebugEnabled() {
         return isLevelEnabled(LOG_LEVEL_DEBUG);
     }
@@ -482,6 +580,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * A simple implementation which logs messages of level DEBUG according
      * to the format outlined above.
+     * 
+     * @param msg message to be logged
      */
     public void debug(String msg) {
         log(LOG_LEVEL_DEBUG, msg, null);
@@ -490,6 +590,9 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform single parameter substitution before logging the message of level
      * DEBUG according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 substitution parameter
      */
     public void debug(String format, Object param1) {
         formatAndLog(LOG_LEVEL_DEBUG, format, param1, null);
@@ -498,6 +601,10 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform double parameter substitution before logging the message of level
      * DEBUG according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
     public void debug(String format, Object param1, Object param2) {
         formatAndLog(LOG_LEVEL_DEBUG, format, param1, param2);
@@ -506,17 +613,29 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform double parameter substitution before logging the message of level
      * DEBUG according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param argArray array of substitution parameters
      */
     public void debug(String format, Object... argArray) {
         formatAndLog(LOG_LEVEL_DEBUG, format, argArray);
     }
 
-    /** Log a message of level DEBUG, including an exception. */
+    /**
+     * Log a message of level DEBUG, including an exception.
+     * 
+     * @param msg message to be logged
+     * @param t {@link Throwable} object
+     */
     public void debug(String msg, Throwable t) {
         log(LOG_LEVEL_DEBUG, msg, t);
     }
 
-    /** Are {@code info} messages currently enabled? */
+    /**
+     * Are {@code info} messages currently enabled?
+     * 
+     * @return {@code true} if INFO messages are enabled; otherwise {@code false}
+     */
     public boolean isInfoEnabled() {
         return isLevelEnabled(LOG_LEVEL_INFO);
     }
@@ -524,6 +643,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * A simple implementation which logs messages of level INFO according
      * to the format outlined above.
+     * 
+     * @param msg message to be logged
      */
     public void info(String msg) {
         log(LOG_LEVEL_INFO, msg, null);
@@ -532,33 +653,52 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform single parameter substitution before logging the message of level
      * INFO according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 substitution parameter
      */
-    public void info(String format, Object arg) {
-        formatAndLog(LOG_LEVEL_INFO, format, arg, null);
+    public void info(String format, Object param1) {
+        formatAndLog(LOG_LEVEL_INFO, format, param1, null);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * INFO according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
-    public void info(String format, Object arg1, Object arg2) {
-        formatAndLog(LOG_LEVEL_INFO, format, arg1, arg2);
+    public void info(String format, Object param1, Object param2) {
+        formatAndLog(LOG_LEVEL_INFO, format, param1, param2);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * INFO according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param argArray array of substitution parameters
      */
     public void info(String format, Object... argArray) {
         formatAndLog(LOG_LEVEL_INFO, format, argArray);
     }
 
-    /** Log a message of level INFO, including an exception. */
+    /**
+     * Log a message of level INFO, including an exception.
+     * 
+     * @param msg message to be logged
+     * @param t {@link Throwable} object
+     */
     public void info(String msg, Throwable t) {
         log(LOG_LEVEL_INFO, msg, t);
     }
 
-    /** Are {@code warn} messages currently enabled? */
+    /**
+     * Are {@code warn} messages currently enabled?
+     * 
+     * @return {@code true} if WARN messages are enabled; otherwise {@code false}
+     */
     public boolean isWarnEnabled() {
         return isLevelEnabled(LOG_LEVEL_WARN);
     }
@@ -566,6 +706,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * A simple implementation which always logs messages of level WARN according
      * to the format outlined above.
+     * 
+     * @param msg message to be logged
      */
     public void warn(String msg) {
         log(LOG_LEVEL_WARN, msg, null);
@@ -574,33 +716,52 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform single parameter substitution before logging the message of level
      * WARN according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 substitution parameter
      */
-    public void warn(String format, Object arg) {
-        formatAndLog(LOG_LEVEL_WARN, format, arg, null);
+    public void warn(String format, Object param1) {
+        formatAndLog(LOG_LEVEL_WARN, format, param1, null);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * WARN according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
-    public void warn(String format, Object arg1, Object arg2) {
-        formatAndLog(LOG_LEVEL_WARN, format, arg1, arg2);
+    public void warn(String format, Object param1, Object param2) {
+        formatAndLog(LOG_LEVEL_WARN, format, param1, param2);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * WARN according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param argArray array of substitution parameters
      */
     public void warn(String format, Object... argArray) {
         formatAndLog(LOG_LEVEL_WARN, format, argArray);
     }
 
-    /** Log a message of level WARN, including an exception. */
+    /**
+     * Log a message of level WARN, including an exception.
+     * 
+     * @param msg message to be logged
+     * @param t {@link Throwable} object
+     */
     public void warn(String msg, Throwable t) {
         log(LOG_LEVEL_WARN, msg, t);
     }
 
-    /** Are {@code error} messages currently enabled? */
+    /**
+     * Are {@code error} messages currently enabled?
+     * 
+     * @return {@code true} if ERROR messages are enabled; otherwise {@code false}
+     */
     public boolean isErrorEnabled() {
         return isLevelEnabled(LOG_LEVEL_ERROR);
     }
@@ -608,6 +769,8 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * A simple implementation which always logs messages of level ERROR according
      * to the format outlined above.
+     * 
+     * @param msg message to be logged
      */
     public void error(String msg) {
         log(LOG_LEVEL_ERROR, msg, null);
@@ -616,32 +779,52 @@ public class ReporterLogger extends MarkerIgnoringBase {
     /**
      * Perform single parameter substitution before logging the message of level
      * ERROR according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 substitution parameter
      */
-    public void error(String format, Object arg) {
-        formatAndLog(LOG_LEVEL_ERROR, format, arg, null);
+    public void error(String format, Object param1) {
+        formatAndLog(LOG_LEVEL_ERROR, format, param1, null);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * ERROR according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param param1 first substitution parameter
+     * @param param2 second substitution parameter
      */
-    public void error(String format, Object arg1, Object arg2) {
-        formatAndLog(LOG_LEVEL_ERROR, format, arg1, arg2);
+    public void error(String format, Object param1, Object param2) {
+        formatAndLog(LOG_LEVEL_ERROR, format, param1, param2);
     }
 
     /**
      * Perform double parameter substitution before logging the message of level
      * ERROR according to the format outlined above.
+     * 
+     * @param format message format string
+     * @param argArray array of substitution parameters
      */
     public void error(String format, Object... argArray) {
         formatAndLog(LOG_LEVEL_ERROR, format, argArray);
     }
 
-    /** Log a message of level ERROR, including an exception. */
+    /**
+     * Log a message of level ERROR, including an exception.
+     * 
+     * @param msg message to be logged
+     * @param t {@link Throwable} object
+     */
     public void error(String msg, Throwable t) {
         log(LOG_LEVEL_ERROR, msg, t);
     }
 
+    /**
+     * Log the information contained in the specified event.
+     * 
+     * @param event {@link LoggingEvent} object
+     */
     public void log(LoggingEvent event) {
         int levelInt = event.getLevel().toInt();
 
