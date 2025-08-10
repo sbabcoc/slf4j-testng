@@ -3,7 +3,7 @@
 
   <groupId>com.github.sbabcoc</groupId>
   <artifactId>slf4j-testng</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>2.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>SLF4J TestNG Reporter Binding</name>
   <description>SLF4J TestNG Reporter binding</description>
@@ -94,6 +94,18 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
