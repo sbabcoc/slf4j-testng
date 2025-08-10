@@ -36,6 +36,8 @@ public class StaticMDCBinder {
 
     /**
      * The unique instance of this class.
+     * 
+     * @see #getMDCA()
      */
     public static final StaticMDCBinder SINGLETON = new StaticMDCBinder();
 
@@ -53,14 +55,20 @@ public class StaticMDCBinder {
     }
 
     /**
-     * Currently this method always returns an instance of {@link StaticMDCBinder}.
+     * Return a new instance of {@link StaticMDCBinder}.
      * 
      * @return new {@link NOPMDCAdapter} instance
+     * @see #getSingleton()
      */
     public MDCAdapter getMDCA() {
         return new NOPMDCAdapter();
     }
 
+    /**
+     * Return the fully qualified name of the {@link NOPMDCAdapter} class.
+     * 
+     * @return fully qualified name of the {@link NOPMDCAdapter} class
+     */
     public String getMDCAdapterClassStr() {
         return NOPMDCAdapter.class.getName();
     }

@@ -40,6 +40,9 @@ public class ReporterLoggerFactory implements ILoggerFactory {
 
     ConcurrentMap<String, Logger> loggerMap;
 
+    /**
+     * Default constructor
+     */
     public ReporterLoggerFactory() {
         loggerMap = new ConcurrentHashMap<String, Logger>();
         ReporterLogger.lazyInit();
@@ -47,6 +50,8 @@ public class ReporterLoggerFactory implements ILoggerFactory {
 
     /**
      * Return an appropriate {@link ReporterLogger} instance by name.
+     * 
+     * @param name logger name
      */
     public Logger getLogger(String name) {
         Logger simpleLogger = loggerMap.get(name);
